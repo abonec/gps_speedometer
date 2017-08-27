@@ -1,0 +1,1 @@
+char *doubleToChar(double var, int width, int prec);
