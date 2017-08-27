@@ -3,7 +3,7 @@
 #include <screen.h>
 
 #define BUTTON 7
-#define DISPLAY_MODES 3
+#define DISPLAY_MODES 2
 
 
 
@@ -11,6 +11,7 @@
 // is being "fed". From the TinyGPS++ examples.
 
 /* u8x8.begin() is required and will sent the setup/init sequence to the display */
+int displayMode = 0;
 void setup(void)
 {
   initGPS();
@@ -18,27 +19,29 @@ void setup(void)
   Serial.begin(9600);
   pinMode(BUTTON, INPUT);
   while (!Serial) ;;
+  Serial.println(displayMode);
 }
 
-int displayMode = 0;
 void loop(void)
 {
   loopGPS();
   printGPSInfo();
-  // if (!digitalRead(BUTTON))
-  // {
-  //   if (displayMode >= DISPLAY_MODES)
-  //   {
-  //     displayMode = 0;
-  //   }
-  //   else
-  //   {
-  //     displayMode++;
-  //   }
-  //   char ch[2];
-    
-  //   drawLine("");
-  // }
+  if (!digitalRead(BUTTON))
+  {
+    if (displayMode >= DISPLAY_MODES - 1)
+    {
+      displayMode = 0;
+    }
+    else
+    {
+      displayMode++;
+    }
+    char ch[2];
+    while(!digitalRead(BUTTON)){
+;
+    }
+    Serial.println(displayMode);
+  }
   // u8x8.drawString(0, 0, "Hello World!");
   // printGPSInfo();
 
