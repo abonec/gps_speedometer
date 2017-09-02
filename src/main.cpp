@@ -25,6 +25,8 @@ void setup(void)
 void loop(void)
 {
   loopGPS();
+  clearBuffer();
+  setFont();
   if (displayMode == 0)
   {
     printGPSInfo();
@@ -33,6 +35,7 @@ void loop(void)
   {
     printSpeed();
   }
+  sendBuffer();
   if (!digitalRead(BUTTON))
   {
     if (displayMode >= DISPLAY_MODES - 1)

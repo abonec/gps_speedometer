@@ -4,3 +4,8 @@ void clearDisplay();
 void addLine(char *val);
 void drawLine(char *val);
 void printLine(char *val);
+void firstPage();
+uint8_t nextPage();
+void clearBuffer();
+void sendBuffer();
+void setFont();
