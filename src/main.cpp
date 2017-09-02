@@ -5,8 +5,6 @@
 #define BUTTON 7
 #define DISPLAY_MODES 2
 
-
-
 // This custom version of delay() ensures that the tinyGPS object
 // is being "fed". From the TinyGPS++ examples.
 
@@ -18,14 +16,23 @@ void setup(void)
   initScreen();
   Serial.begin(9600);
   pinMode(BUTTON, INPUT);
-  while (!Serial) ;;
+  while (!Serial)
+    ;
+  ;
   Serial.println(displayMode);
 }
 
 void loop(void)
 {
   loopGPS();
-  printGPSInfo();
+  if (displayMode == 0)
+  {
+    printGPSInfo();
+  }
+  else
+  {
+    printSpeed();
+  }
   if (!digitalRead(BUTTON))
   {
     if (displayMode >= DISPLAY_MODES - 1)
@@ -36,11 +43,11 @@ void loop(void)
     {
       displayMode++;
     }
-    char ch[2];
-    while(!digitalRead(BUTTON)){
-;
+    while (!digitalRead(BUTTON))
+    {
+      ;
     }
-    Serial.println(displayMode);
+    clearDisplay();
   }
   // u8x8.drawString(0, 0, "Hello World!");
   // printGPSInfo();

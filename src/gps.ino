@@ -5,11 +5,11 @@
 TinyGPSPlus gps;
 static const int RXPin = 4, TXPin = 3;
 SoftwareSerial ss(RXPin, TXPin);
-static const uint32_t GPSBaud = 38400;
+// static const uint32_t GPSBaud = 38400;
+static const uint32_t GPSBaud = 9600;
 
 void initGPS()
 {
-
     ss.begin(GPSBaud);
 }
 void loopGPS()
@@ -44,6 +44,12 @@ void printGPSInfo()
     addLine(buffer);
     sprintf(buffer, "Satellites: %d", gps.satellites.value());
     addLine(buffer);
+}
+
+void printSpeed(){
+    char buffer[16];
+    sprintf(buffer, "%s", doubleToChar(gps.speed.kmph(), 4, 1));
+    drawLine(buffer);
 }
 static void smartDelay(unsigned long ms)
 {

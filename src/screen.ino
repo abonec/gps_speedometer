@@ -28,6 +28,14 @@ void addLine(char *val)
 void drawLine(char *val)
 {
     resetLine();
-    u8x8.clearDisplay();
+    printLine(val);
+}
+void printLine(char *val)
+{
     u8x8.drawString(0, 3, val);
+}
+
+void clearDisplay()
+{
+    u8x8.clearDisplay();
 }
